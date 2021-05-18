@@ -68,4 +68,49 @@ public class ArticleDAO {
 		// TODO Auto-generated method stub
 		list[idx] = article;
 	}
+
+	public Article[] searchArticleByWriter(String writer) {
+		//1. count đếm bài viết có bao nhiêu writer 
+		int count = 0;
+		//đang sd use Reference type Array
+		//check null hay ko
+		// use Reference type Array
+		//kiểm tra idx tồn tại ko
+		// is Exist?
+		//Count writer
+		for(int i = 0 ; i < list.length; i++) {
+			//
+			if(list[i] != null) {
+				if(list[i].getWriterName().equals(writer)) {
+					count += 1;
+				}
+			}
+		}
+		if(count > 0) {
+			//has writer
+			Article[] result = new Article[count];
+			int k = 0; 	//index of result
+			for(int i = 0 ; i < list.length ; i++) {
+				if(list[i] != null) {
+					if(list[i].getWriterName().equals(writer)) {
+						//copied instance
+	//Cách 1			Article rt = new Article(list[i]);	//sao chep art qua rt
+	//					result[k] = rt;
+	//					k++;
+	//Cách 2
+						//origin copied to rt		//is Exits ? // WHYYYYYY?
+						Article rt = new Article();	//origin -> rt
+						rt.setSeq(list[i].getSeq());
+						rt.setTitle(list[i].getTitle());
+						rt.setWriterName(list[i].getWriterName());
+						rt.setContent(list[i].getContent());
+						result[k] = rt;	// copied instance //sao chep art qua rt
+						k++;
+					}
+				}
+			}
+			return result;
+		}//end if count
+		return null;
+	}
 }

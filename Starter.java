@@ -68,17 +68,27 @@ public class Starter {
 //					System.out.println("invalid index");
 //				}
 //			}
-//			if(cmd.equals("search")) {		//SEARCH
-//				System.out.println("Search writer :>");
-//				cmd = sc.nextLine();
-//				Article rs = searchArticleByWriter("Jang");
-//			}
+			if(cmd.equals("search")) {		//SEARCH
+				System.out.println("Search writer :>");
+				cmd = sc.nextLine();
+				//check null hay ko
+				Article[] rs = dao.searchArticleByWriter(cmd);
+/**				if(rs !=null) {
+					String s = "search resule\t";
+					for(int i = 0; i < rs.length; i++) {
+						s += [i].getTitle();
+						s += "(" + rs[i].getWriterName() + ")\n";
+					}
+					s += "------------";
+					System.out.println(s);
+				}
+*/			
+				if(rs != null) {
+					String s = showList(rs);
+					System.out.println(s);
+				}
+			}
 		}// end while
-	}
-
-	private static Article searchArticleByWriter(String string) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 //	private static void deleteArticle(int idx) {
