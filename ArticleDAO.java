@@ -36,4 +36,36 @@ public class ArticleDAO {
 		}
 		return result;
 	}
+
+	//Get Article
+	public Article getArticle(int idx) {
+		// TODO Auto-generated method stub
+		Article origin = list[idx];		//cách 2
+		if(origin != null) {
+			//origin copied to rt		//is Exits ? // WHYYYYYY?
+			Article rt = new Article();	//origin -> rt
+			rt.setSeq(origin.getSeq());
+			rt.setTitle(origin.getTitle());
+			rt.setWriterName(origin.getWriterName());
+			rt.setContent(origin.getContent());
+			return rt;	// copied instance //sao chep art qua rt
+		}
+		return null;
+		
+//		//cách 1
+//		Article origin = list[idx];
+//		//kiểm tra idx tồn tại ko// is Exist?
+//		for(int i =0; i< list.length; i++) {
+//			if(list[i] != null) {
+//				if(i == idx) {
+//					//found it đã tìm thấy
+//				}
+//			}
+//		}
+	}
+
+	public void update(Article article, int idx) {
+		// TODO Auto-generated method stub
+		list[idx] = article;
+	}
 }
