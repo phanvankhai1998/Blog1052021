@@ -46,16 +46,16 @@ public class Starter {
 			if(cmd.equals("showlist")) {	//RETRIEVE
 				showList(list);
 			}
-//			if(cmd.equals("edit")) {		//UPDATE
-//				System.out.print("Select art's Index > ");
-//				cmd = sc.nextLine();				// "1"
-//				int idx = Integer.parseInt(cmd);	//	1
+			if(cmd.equals("edit")) {		//UPDATE
+				System.out.print("Select art's Index > ");
+				cmd = sc.nextLine();				// "1"
+				int idx = Integer.parseInt(cmd);	//	1
 //				if(idx < seq) {						//if seq 3, [0][1][2]
-//					editArticle(idx);				//go to edit [idx]article
+				editArticle(idx);				//go to edit [idx]article
 //				}else {
 //					System.out.println("Invaild index");
 //				}
-//			}
+			}
 //			if(cmd.equals("delete")) {		//DELETE
 //				System.out.println("Seleact article's index :>");
 //				cmd = sc.nextLine();
@@ -97,7 +97,7 @@ public class Starter {
 		for(int i = 0; i < rs.length; i++) {	//rendering by View role
 			if(rs[i] != null) {
 				System.out.println(
-						"Title : " + rs[i].getTitle() + " Write : " + rs[i].getWriterName() + " Contetn : " + rs[i].getContent()
+						" - Title : " + rs[i].getTitle() + " - Write : " + rs[i].getWriterName() + " - Content : " + rs[i].getContent()
 				);
 			}
 		}
@@ -106,30 +106,31 @@ public class Starter {
 		return s;
 	}
 
-//	private static void editArticle(int idx) {
-//		// TODO Auto-generated method stub
-//		Article article = list[idx];		//get reference
-//		
-//		System.out.println("Title >" + article.getTitle());
-//		String title = sc.nextLine();
-//		if(title.length() > 0 ) {		// press only <enter> , empty string
-//			article.setTitle(title);	//over write data
-//		}
-//		
-//		System.out.println("Write > " + article.getWriterName());
-//		String name = sc.nextLine();
-//		if(!name.isEmpty()) {			// have input data
-//			article.setWriterName(name);
-//		}
-//		
-//		System.out.println("Content >" + article.getContent());
-//		String content = sc.nextLine();
-//		if(content.length() > 0) {
-//			article.setContent(content);
-//		}
-//		// quiz ? tai sao khong co code below
-//		//	list[idx] = article;	already set via setter
-//	}
+	private static void editArticle(int idx) {
+		// TODO Auto-generated method stub
+		//Article article = list[idx];	//get reference	// article fields
+		Article article = dao.getArticle(idx);
+		
+		System.out.println("Title >" + article.getTitle());
+		String title = sc.nextLine();
+		if(title.length() > 0 ) {		// press only <enter> , empty string
+			article.setTitle(title);	//over write data
+		}
+		
+		System.out.println("Write > " + article.getWriterName());
+		String name = sc.nextLine();
+		if(!name.isEmpty()) {			// have input data
+			article.setWriterName(name);
+		}
+		
+		System.out.println("Content >" + article.getContent());
+		String content = sc.nextLine();
+		if(content.length() > 0) {
+			article.setContent(content);
+		}
+		//have to update in DAO
+		dao.update(article,idx);
+	}
 
 	private static void registArticle() {
 		// TODO Auto-generated method stub
@@ -145,7 +146,7 @@ public class Starter {
 		article.setTitle(title);
 		article.setWriterName(name);
 		article.setContent(content);
-		System.out.println(article);
+//		System.out.println(article);
 /**
  * 		// Lưu những giá trị Array // Mà Array tạo ở DAO
 		// save to array in DAO
