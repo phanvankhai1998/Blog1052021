@@ -29,7 +29,7 @@ public class ArticleDAO {
 		// }
 		System.out.println("This Save in DAO:\n" + article);
 		boolean result = false;
-		if(seq< list.length) {
+		if(seq < list.length) {
 			list[seq] = article;
 			++seq;
 			result = true;
