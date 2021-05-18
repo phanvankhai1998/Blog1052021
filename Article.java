@@ -16,7 +16,35 @@ public class Article {
 	private long seq;
 	private String title;
 	private String writerName;
-	
+	private String content;
+	public Article() {
+		
+	}
+	// Copy Constructor 
+	public Article(Article arg) {
+		// this mean new instance
+		this.seq = arg.getSeq();
+		this.title = arg.getTitle();
+		this.writerName = arg.getWriterName();
+		this.content = arg.getContent();
+	}
+	// has all argument for fields
+	// constructor using Fields
+	public Article(long seq, String title, String writerName, String content) {
+		super();
+		this.seq = seq;
+		this.title = title;
+		this.writerName = writerName;
+		this.content = content;
+	}
+	public Article copyTo(Article arg) {
+		Article article = new Article();
+		article.setSeq(arg.getSeq());
+		article.setTitle(arg.getTitle());;
+		article.setWriterName(arg.getWriterName());;
+		article.setContent(arg.getContent());
+		return article;
+	}
 	public long getSeq() {
 		return seq;
 	}
@@ -41,6 +69,5 @@ public class Article {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	private String content;
 	// alt+shift+s > generate Getter/Setter
 }
