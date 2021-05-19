@@ -10,6 +10,7 @@ import java.util.Scanner;
  * blog CRUD
  * - console : keyboard and monitor
  * 
+ *  * API: Application 
  * @author Administrator
  *
  */
@@ -25,15 +26,16 @@ public class Starter {
 	
 	// Control role
 	public static void main(String[] args) {
-		// TODO: program entry point ( start )
 		sc = new Scanner(System.in);
-		// list = new Article[10];
-		dao = new ArticleDAO();
+		dao = new ArticleDAOImpl();
+		//dao = new ArticleDAO();
+		
 		while(true) {
 			// show all article list// if get reference, can be changed
-			Article[] list = dao.getAll();
+			//Article[] list = ((ArticleDAOImpl)dao).getAll();
+			Article[] list = dao.select();
 			String view = showList(list);
-			System.out.println("VIEW >" + view);
+			System.out.println(view);
 			
 			//request form keyboard
 			System.out.println(" > ");
@@ -48,7 +50,7 @@ public class Starter {
 			}
 			if(cmd.equals("edit")) {		//UPDATE
 				System.out.print("Select art's Index > ");
-				cmd = sc.nextLine();				// "1"
+//				cmd = sc.nextLine();				// "1"
 				int idx = Integer.parseInt(cmd);	//	1
 //				if(idx < seq) {						//if seq 3, [0][1][2]
 				editArticle(idx);				//go to edit [idx]article
@@ -70,19 +72,11 @@ public class Starter {
 //			}
 			if(cmd.equals("search")) {		//SEARCH
 				System.out.println("Search writer :>");
-				cmd = sc.nextLine();
+//				cmd = sc.nextLine();
 				//check null hay ko
-				Article[] rs = dao.searchArticleByWriter(cmd);
-/**				if(rs !=null) {
-					String s = "search resule\t";
-					for(int i = 0; i < rs.length; i++) {
-						s += [i].getTitle();
-						s += "(" + rs[i].getWriterName() + ")\n";
-					}
-					s += "------------";
-					System.out.println(s);
-				}
-*/			
+//				Article[] rs = ((ArticleDAOImpl)dao).searchArticleByWriter(cmd);/	
+				Article vo = new Article();
+				Article[] rs = dao.selectBy(vo);
 				if(rs != null) {
 					String s = showList(rs);
 					System.out.println(s);
@@ -103,12 +97,14 @@ public class Starter {
 	private static String showList(Article[] rs) {
 		// TODO Auto-generated method stub
 		//check null
-		String s = "\nShow list > \t";
-		for(int i = 0; i < rs.length; i++) {	//rendering by View role
+		String s = "search result\n";
+		for(int i=0; i<rs.length;i++) {//rendering by View role
 			if(rs[i] != null) {
-				System.out.println(
-						" - Title : " + rs[i].getTitle() + " - Write : " + rs[i].getWriterName() + " - Content : " + rs[i].getContent()
-				);
+//				System.out.println(
+//	" - Title : " + rs[i].getTitle() + " - Write : " + rs[i].getWriterName() + " - Content : " + rs[i].getContent()
+//				);
+				s += rs[i].getTitle();
+				s += "(" + rs[i].getWriterName() + ")\n";
 			}
 		}
 		s += "-----------------";
@@ -119,8 +115,15 @@ public class Starter {
 	private static void editArticle(int idx) {
 		// TODO Auto-generated method stub
 		//Article article = list[idx];	//get reference	// article fields
-		Article article = dao.getArticle(idx);
-		
+		//Article article = dao.getArticle(idx);
+		//Article article = dao.selectOne(" " + );
+		// vì nằm bên DAO nên gửi request cho DAO
+		//check Null
+		Article article = dao.selectOne("" + idx);
+		if(article == null) {
+			System.out.println("Indvail Index");
+			return;
+		}
 		System.out.println("Title >" + article.getTitle());
 		String title = sc.nextLine();
 		if(title.length() > 0 ) {		// press only <enter> , empty string
@@ -136,10 +139,10 @@ public class Starter {
 		System.out.println("Content >" + article.getContent());
 		String content = sc.nextLine();
 		if(content.length() > 0) {
-			article.setContent(content);
+			article.setContent(content);//have input data
 		}
 		//have to update in DAO
-		dao.update(article,idx);
+		dao.update(article);
 	}
 
 	private static void registArticle() {
@@ -156,7 +159,10 @@ public class Starter {
 		article.setTitle(title);
 		article.setWriterName(name);
 		article.setContent(content);
-//		System.out.println(article);
+		// save to array in DAO
+		// delegate to dao <-- call method of dao
+		dao.insert(article);
+		
 /**
  * 		// Lưu những giá trị Array // Mà Array tạo ở DAO
 		// save to array in DAO
@@ -168,9 +174,9 @@ public class Starter {
 		// ++seq;//ArrayIndexOutOfBounds
 		// }		
  */			
-		if(!dao.save(article)) {
-			System.out.println("Failed");
-		}
+//		if(!dao.save(article)) {
+//			System.out.println("Failed");
+//		}
 
 //		//OUT is instance name : article
 //		System.out.println(article);	// OUT: Project.Aritcle@7637f22
