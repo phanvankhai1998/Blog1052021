@@ -17,10 +17,10 @@ public class Article {
 	private String title;
 	private String writerName;
 	private String content;
-	public Article() {
-		
-	}
-	// Copy Constructor 
+	public Article() {}
+	
+	//make clone method as Constructor
+	//Copy constructor		khi tạo constructor thì default biến mất
 	public Article(Article arg) {
 		// this mean new instance
 		this.seq = arg.getSeq();
@@ -28,6 +28,7 @@ public class Article {
 		this.writerName = arg.getWriterName();
 		this.content = arg.getContent();
 	}
+	
 	// has all argument for fields
 	// constructor using Fields
 	public Article(long seq, String title, String writerName, String content) {
@@ -37,6 +38,7 @@ public class Article {
 		this.writerName = writerName;
 		this.content = content;
 	}
+	//khi ko sd constructor
 	public Article copyTo(Article arg) {
 		Article article = new Article();
 		article.setSeq(arg.getSeq());
