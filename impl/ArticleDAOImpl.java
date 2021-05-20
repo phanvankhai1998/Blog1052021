@@ -1,18 +1,26 @@
-package coeding.java.blog;
+package coeding.java.blog.impl;
+
+import java.io.File;
+import java.util.List;
+
+import coeding.java.blog.Article;
+import coeding.java.blog.DAO;
 
 /**
- * 
  * Model role
  * DAO : Data Access Object
  * implement CRUD for Article
  */
-public class ArticleDAOImpl implements ArticleDAO {
+public class ArticleDAOImpl implements DAO<Article> {
 		//what data type?
 		private Article[] list;	
 		private int seq;
-		// method' rule like desgin for project
-		//default contructor
-		//public dinh ko co kieu tra ve
+		/**
+		 *  method' rule like desgin for project
+		 * 	default contructor
+		 *	public dinh ko co kieu tra ve
+		 */ 
+		
 		public ArticleDAOImpl() {
 			list = new Article[10];	//length fixed 10
 		}
@@ -89,7 +97,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 			for(int i = 0 ; i < list.length; i++) {
 				//use Reference type Array
 				if(list[i] != null) {
-					if(list[i].getWriterName().equals(writer)) {
+					if(list[i].getName().equals(writer)) {
 						count += 1;
 					}
 				}
@@ -100,7 +108,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 				int k = 0; 	//index of result
 				for(int i = 0 ; i < list.length ; i++) {
 					if(list[i] != null) {
-						if(list[i].getWriterName().equals(writer)) {
+						if(list[i].getName().equals(writer)) {
 							//copied instance
 							//Cách 1			
 							Article rt = new Article(list[i]);	//sao chep art qua rt
@@ -135,25 +143,13 @@ public class ArticleDAOImpl implements ArticleDAO {
 		}
 
 		@Override
-		public void delete(int id) {
+		public void delete(Long id) {
 			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
-		public Article[] select() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public Article[] selectBy(Article vo) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public Article selectOne(String key) {
+		public List<Article> select(Article arg) {
 			// TODO Auto-generated method stub
 			return null;
 		}
