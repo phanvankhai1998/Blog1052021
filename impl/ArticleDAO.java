@@ -35,8 +35,8 @@ public class ArticleDAO implements DAO<Article>{
 			//return storage.subList(0, 0);	//all return	
 			//all return not will, .size() == 0
 			//subList(0, 0); copied
+			//list copied
 		}
-		
 		List<Article> rs = new ArrayList<Article>();
 		if(arg.getName() != null && !arg.getName().isEmpty()) {
 			//.length > 0 not arg.getName().isEmpty()
@@ -51,10 +51,10 @@ public class ArticleDAO implements DAO<Article>{
 			for (Article at : storage) {
 				if(at.getAid() == arg.getAid()) {
 					/**
-					 *  1. Long is class not primitive .equal()
-					 *	but , wrapping (long)	<----- auto convert to long
+					 *  1. Long is class not primitive, .equal()
+					 *	but, wrapping (long) <- auto convert to long
 					 *	2. at where save ?
-					 *	if aid is unique ()
+					 *	if aid is unique( means dont duplicated )
 					 */
 					rs.add(at);
 					break;

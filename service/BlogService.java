@@ -19,7 +19,18 @@ public class BlogService {
 
 	public Article getActicle(String idx) {
 		// TODO Auto-generated method stub
-		return null;
+		Article vo = new Article();
+		//type converting
+		vo.setAid(Long.parseLong(idx));
+		// vo.name = null; String
+		// List<> != null and .size() == 0, have no elements
+		return (dao.select(vo).size() > 0) ?
+				dao.select(vo).get(0) : null;
+		// OOP use Chainning( return . return . return ......> )
+		//	is Reference ?
+		//	has Reference ?
+		//	has value and length
+		// 	how to convert Type when use .(dot) operator 
 	}
 
 	public List<Article> getListByName(Article vo) {
@@ -31,5 +42,4 @@ public class BlogService {
 		// TODO Auto-generated method stub
 		dao.insert(article);
 	}
-	
 }

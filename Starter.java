@@ -15,6 +15,16 @@ import coeding.java.blog.service.BlogService;
  * 
  * @author Administrator
  */
+
+/**
+ * Role based programming : source files
+ * Starter.main() : request, response 
+ * 	
+ * delegate to(has) //BlogService 
+ *  BlogService : business logic : actual processing for request -> trể kq về
+ * 	has ArticleDAO : article data management ( CRUD )
+*/
+
 public class Starter {
 	static Scanner sc; 
 	static ArticleDAO dao;
@@ -23,14 +33,6 @@ public class Starter {
 	 * private int seq;		
 	 * không cần thiết nữa, vì chuyển array qua DAO index of array
 	 * @param args
-	 */
-	
-	/**
-	 * Starter.main() : request, response
-	 * Business logic : actual processing for request -> trể kq về
-	 * ArticleDAO: article data managerment(CRUD)
-	 * delegate to(has) //BlogService 
-	 * 
 	 */
 	
 	// Control role
@@ -222,7 +224,7 @@ public class Starter {
 		//article.setWdate(wdate);
 		// save to array in DAO
 		// delegate to dao <-- call method of dao
-		dao.insert(article);
+		//dao.insert(article);
 		return article;
 	}
 }
